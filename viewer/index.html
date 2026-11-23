@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rotate and animate the horizontal load surface for a jacket structure under waves and current.">
+  <title>Jacket Load Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="plotly.min.js"></script>
+  <script defer src="loads.js"></script>
+  <script defer src="viewer.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <div><p class="eyebrow">PART 2(a) · WAVE + CURRENT</p><h1>Jacket load explorer</h1></div>
+    <nav aria-label="Downloads"><a href="https://jacket-load-explorer.y655375436.chatgpt.site/jacket_load_cycle.avi" download>Download AVI</a><a href="jacket_load_interactive.html" download>Save interactive copy</a></nav>
+  </header>
+  <p class="intro">Explore the instantaneous horizontal load through a wave cycle. Drag to rotate, scroll to zoom, or choose a viewpoint.</p>
+  <section class="viewer" aria-label="Interactive load surface">
+    <div class="toolbar">
+      <div class="view-controls"><label for="viewpoint">Viewpoint</label><select id="viewpoint"><option value="oblique">Oblique</option><option value="top">Top view</option><option value="current">Current direction vs load</option><option value="wave">Wave direction vs load</option></select></div>
+      <div class="phase-readout"><span>Phase at origin</span><strong id="phase-value">0.0°</strong><span id="time-value">0.00 / 10.00 s</span></div>
+    </div>
+    <div id="chart" role="img" aria-label="Rotatable 3D surface. Current heading and wave heading are the horizontal axes; the vertical axis is horizontal resultant force in meganewtons."></div>
+    <p id="error" role="alert" hidden></p>
+    <div class="playback"><button id="play" type="button" aria-pressed="false">Play cycle</button><label class="sr-only" for="phase">Wave phase</label><input id="phase" type="range" min="0" max="99" step="1" value="0" aria-valuetext="0 degrees"><span class="end-label">360°</span></div>
+    <p id="peak" class="peak">Loading sampled forces…</p>
+  </section>
+  <div class="notes"><p>Surface height is force, not elevation on the structure. The marked point is the largest sampled load at the displayed phase.</p><details><summary>Model and sampling</summary><p>The surface shows the magnitude of the summed horizontal force on the whole jacket, with independent wave and current headings. It uses the existing Part 2(a) linear wave–current model and integrates drag and inertia to the instantaneous local wave surface.</p><p>Wave height 12 m · period 10 s · water depth 40 m · current speed 1.6 m/s. Headings are sampled every 12°, with 100 phases per cycle and 129 integration points along each submerged member. This display grid does not replace the refined maximum search.</p><p>Column drag uses the horizontal velocity vector. Beams and diagonals retain the independent normal-component drag approximation in the calculation code. Positive headings rotate from +x towards +y.</p></details></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+.env
+generated/
+viewer/plotly.min.js
+viewer/jacket_load_interactive.html
+.openai/
