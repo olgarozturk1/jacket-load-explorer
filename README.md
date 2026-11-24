@@ -2,6 +2,14 @@
 
 Part 2(a): horizontal force on the whole jacket under waves and current, with an interactive 3D load surface.
 
+## Start here: Main results — Part 2(a)
+
+**[Run this file: part2a.py](part2a.py)**
+
+This is the main calculation for Part 2(a). It finds and prints the largest horizontal load, the corresponding wave and current directions, the phase, and the force contributions from each member group. Run it in Spyder, or follow [the running instructions below](#run-the-calculation).
+
+## Interactive viewer and downloads
+
 **[Open the public interactive viewer](https://jacket-load-explorer.y655375436.chatgpt.site)**
 
 Drag to rotate, scroll to zoom, choose a viewpoint, and play or select a phase. The height is the horizontal resultant force, not physical elevation on the jacket. The red point marks the largest sampled load at the current phase.
@@ -12,7 +20,7 @@ Drag to rotate, scroll to zoom, choose a viewpoint, and play or select a phase. 
 
 | File | Purpose |
 | --- | --- |
-| `part2a.py` | The supplied NumPy calculation, grid search, refinement, results and plots. |
+| **[part2a.py](part2a.py)** | **Main results — run this file for Part 2(a).** Includes the maximum-load search, results and plots. |
 | `build_viewer.py` | Recalculates the phase-dependent data using `part2a.py` and builds the interactive HTML. |
 | `export_avi.py` | Exports the generated cycle as an AVI with a fixed viewpoint. |
 | `viewer/index.html` | Viewer page and labels. |
