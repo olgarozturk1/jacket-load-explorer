@@ -4,6 +4,8 @@ Part 2(a): horizontal force on the whole jacket under waves and current, with an
 
 ## Start here: Main results — Part 2(a)
 
+**[Read the explanation and main results (PDF)](docs/Hydro%20CW%20Part%202%20-%20a.pdf)**
+
 **[Run this file: part2a.py](part2a.py)**
 
 This is the main calculation for Part 2(a). It finds and prints the largest horizontal load, the corresponding wave and current directions, the phase, and the force contributions from each member group. Run it in Spyder, or follow [the running instructions below](#run-the-calculation).
@@ -20,6 +22,7 @@ Drag to rotate, scroll to zoom, choose a viewpoint, and play or select a phase. 
 
 | File | Purpose |
 | --- | --- |
+| [Hydro CW Part 2 - a.pdf](docs/Hydro%20CW%20Part%202%20-%20a.pdf) | Explanation of the search, assumptions, main results and spatial refinement check. |
 | **[part2a.py](part2a.py)** | **Main results — run this file for Part 2(a).** Includes the maximum-load search, results and plots. |
 | `build_viewer.py` | Recalculates the phase-dependent data using `part2a.py` and builds the interactive HTML. |
 | `export_avi.py` | Exports the generated cycle as an AVI with a fixed viewpoint. |
