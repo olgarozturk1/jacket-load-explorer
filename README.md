@@ -1,6 +1,6 @@
 # Jacket Load Explorer
 
-Part 2(a): horizontal force on the whole jacket under waves and current, with an interactive 3D load surface.
+Parts 2(a) and 2(b): horizontal and vertical loading on the whole jacket under waves and current. The interactive 3D viewer illustrates the horizontal load from Part 2(a).
 
 ## Start here: Main results — Part 2(a)
 
@@ -9,6 +9,18 @@ Part 2(a): horizontal force on the whole jacket under waves and current, with an
 **[Run this file: part2a.py](part2a.py)**
 
 This is the main calculation for Part 2(a). It finds and prints the largest horizontal load, the corresponding wave and current directions, the phase, and the force contributions from each member group. Run it in Spyder, or follow [the running instructions below](#run-the-calculation).
+
+## Main results — Part 2(b)
+
+**[Run this file: part2b.py](part2b.py)**
+
+This is the main calculation for Part 2(b). It uses NumPy sampling, interpolation, trapezoidal integration and progressively finer search grids, following the same numerical approach as Part 2(a).
+
+For the supplied inputs, the largest downward foundation load found is **53.6927 MN**, including weight, constant SWL buoyancy, vertical drag and vertical inertia. The refined grid gives wave heading **353.25°**, current heading **344.55°**, and reference phase **151.335°**. These are numerical search results under the stated assumptions.
+
+The script prints the contributions at that same instant, cycle means and semi-ranges, both signed extremes and their phases, member-group contributions, and a spatial accuracy check. Cycle statistics are evaluated at the selected heading pair. It also plots the vertical force histories and a map of cycle-maximum compression against wave and current headings.
+
+Vertical drag and inertia are positive upwards. Foundation compression is positive downwards: **C = W − B − F_D,z − F_I,z**, where W and B are positive magnitudes. Semi-range means (maximum − minimum)/2; it need not describe a symmetric oscillation about the mean.
 
 ## Interactive viewer and downloads
 
@@ -24,6 +36,7 @@ Drag to rotate, scroll to zoom, choose a viewpoint, and play or select a phase. 
 | --- | --- |
 | [Hydro CW Part 2 - a.pdf](docs/Hydro%20CW%20Part%202%20-%20a.pdf) | Explanation of the search, assumptions, main results and spatial refinement check. |
 | **[part2a.py](part2a.py)** | **Main results — run this file for Part 2(a).** Includes the maximum-load search, results and plots. |
+| **[part2b.py](part2b.py)** | **Main results — run this file for Part 2(b).** Vertical loads, constant buoyancy, maximum foundation compression, cycle statistics and plots. |
 | `build_viewer.py` | Recalculates the phase-dependent data using `part2a.py` and builds the interactive HTML. |
 | `export_avi.py` | Exports the generated cycle as an AVI with a fixed viewpoint. |
 | `viewer/index.html` | Viewer page and labels. |
@@ -31,7 +44,7 @@ Drag to rotate, scroll to zoom, choose a viewpoint, and play or select a phase. 
 | `viewer/styles.css` | Viewer layout. |
 | `viewer/loads.js` | Saved load data used by the current viewer. |
 
-The calculation functions and input values are the supplied code. The additional 3D plotting cell is guarded so the exporter can import those functions without starting the search or opening figures.
+The Part 2(a) calculation functions and input values are the supplied code. Its additional 3D plotting cell is guarded so the exporter can import those functions without starting the search or opening figures. Both calculation files can also be imported without running their searches.
 
 ## Run the calculation
 
@@ -42,7 +55,13 @@ python -m pip install -r requirements.txt
 python part2a.py
 ```
 
-The search prints its progress, the largest resultant found, its wave/current headings and phase, component forces at that same instant, and a spatial refinement check. If the Matplotlib window blocks the script, close the first figures to continue to the separate 3D surface plot.
+For Part 2(b), run this instead after installing the packages:
+
+```bash
+python part2b.py
+```
+
+In Spyder, open the required file and run the whole script. Both calculations use NumPy and Matplotlib; Part 2(b) does not require SciPy. The searches print progress and their refined results. For Part 2(a), close the first figures to continue to the separate 3D surface plot if the Matplotlib window blocks the script.
 
 ## Build and share the interactive viewer
 
@@ -78,7 +97,9 @@ The output is `generated/jacket_load_cycle.avi`. If you already ran the builder 
 - Drag and inertia are integrated along the instantaneous submerged length, using the local wave surface. Linear profiles are continued above still water level.
 - Columns use vector horizontal drag. Beams and diagonals retain the independent normal-component drag approximation in the supplied calculation.
 - Member-centreline wetting; no axial drag, shielding or diffraction.
-- Signed member forces are summed at the same instant before taking the horizontal resultant.
+- Signed member forces are summed at the same instant. Part 2(a) takes the horizontal resultant; Part 2(b) combines vertical drag and inertia with weight and buoyancy to calculate downward foundation compression.
+
+Part 2(b) additionally assumes an 8000-tonne structural mass and constant SWL buoyancy based on idealised sealed member volumes. The corresponding hydrostatic uplift is assumed available, including at column bases; overlapping volumes at joints are not subtracted. Weight and buoyancy have zero oscillation amplitude. Vertical cross-flow forces on the columns are zero in this model because axial loading is omitted. Both dynamic force terms still use the instantaneous local water surface, rather than fixed SWL or crest integration limits.
 
 The interactive animation uses 12-degree heading spacing, 100 phases per cycle and 129 points along each submerged member. It displays instantaneous load; the static peak surface instead maximizes over phase. The animation's sampled maxima do not replace the finer maximum search in `part2a.py`.
 
